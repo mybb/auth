@@ -51,7 +51,7 @@ class HashFactory implements HasherContract
 
         // Invalid hashing type
         if (!class_exists($hasherClass)) {
-            $hasherClass = 'bcrypt';
+            $hasherClass = 'MyBB\\Auth\\Hashing\\HashBcrypt';
         }
 
         $hasher = $this->app->make($hasherClass);
