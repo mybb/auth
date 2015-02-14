@@ -1,15 +1,21 @@
 {
-    "name": "mybb/auth",
-    "description": "The authentication system used by MyBB 2",
-	"keywords": ["mybb", "forum", "laravel"],
-	"license": "LGPL3",
-    "require": {
-        "illuminate/support": "~5.0"
-    },
-    "autoload": {
-        "psr-0": {
-            "MyBB\\Auth": "src/"
-        }
-    },
-    "minimum-stability": "dev"
+  "name": "mybb/auth",
+  "description": "The authentication system used by MyBB 2",
+  "keywords": [
+    "mybb",
+    "forum",
+    "laravel"
+  ],
+  "license": "LGPL3",
+  "require": {
+    "illuminate/support": "~5.0",
+    "illuminate/auth": "~5.0",
+    "illuminate/hashing": "~5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "MyBB\\Auth\\": "src/"
+    }
+  },
+  "minimum-stability": "dev"
 }

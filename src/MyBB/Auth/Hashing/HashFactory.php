@@ -1,79 +1,65 @@
 <?php namespace MyBB\Auth\Hashing;
 
-use RuntimeException;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
+use RuntimeException;
 
 class HashFactory implements HasherContract
 {
-	/**
-	 * A factory is always singleton
-	 * 
-	 * @var MyBB\Auth\Hashing\HashFactory
-	 */
-	private static $instance = null;
-	private function __construct() {}
-	public static function getInstance()
-	{
-		if(static::$instance == null)
-		{
-			static::$instance = new self();
-		}
+    /** @var Application $app */
+    private $app;
 
-		return static::$instance;
-	}
+    /**
+     * @param Application $app
+     */
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
 
-	/**
-	 * As we're implementing Laravel's hasher interface we need to have make, check and needsRehash. However the "work" will be done in the different classes
-	 */
-	public function make($value, array $options = array())
-	{
-		$hasher = $this->getHasher($options['type']);
-		return $hasher->make($value, $options);
-	}
+    public function make($value, array $options = array())
+    {
+        $hasher = $this->getHasher($options['type']);
 
-	public function check($value, $hashedValue, array $options = array())
-	{
-		$hasher = $this->getHasher($options['type']);
-		return $hasher->check($value, $hashedValue, $options);
-	}
+        return $hasher->make($value, $options);
+    }
 
-	public function needsRehash($hashedValue, array $options = array())
-	{
-		$hasher = $this->getHasher($options['type']);
-		return $hasher->needsRehash($hashedValue, $options);
-	}
+    public function check($value, $hashedValue, array $options = array())
+    {
+        $hasher = $this->getHasher($options['type']);
 
-	/**
-	 * Get's the actual hashing class for a specified hashing type
-	 * 
-	 * @param string $hashName The name of the hashing class we should use
-	 * @return Illuminate\Contracts\Hashing\Hasher
-	 */
-	protected function getHasher($hashName)
-	{
-		// Defaults to bcrypt
-		if(empty($hashName))
-		{
-			$hashName = "bcrypt";
-		}
+        return $hasher->check($value, $hashedValue, $options);
+    }
 
-		// Namespace the class properly
-		$class = "MyBB\Auth\Hashing\Hash".ucfirst($hashName);
+    public function needsRehash($hashedValue, array $options = array())
+    {
+        $hasher = $this->getHasher($options['type']);
 
-		// Invalid hashing type
-		if(!class_exists($class))
-		{
-			throw new RuntimeException("Hasher {$hashName} is not supported");
-		}
+        return $hasher->needsRehash($hashedValue, $options);
+    }
 
-		$i = $class::getInstance();
+    /**
+     * Get's the actual hashing class for a specified hashing type
+     *
+     * @param string $hashName The name of the hashing class we should use.
+     *
+     * @return HasherContract The created hasher.
+     */
+    protected function getHasher($hashName = 'bcrypt')
+    {
+        $hasherClass = 'MyBB\\Auth\\Hashing\\Hash' . ucfirst($hashName);
 
-		// Make sure the hasher implements the correct interface
-		if(!($i instanceof HasherContract))
-		{
-			throw new RuntimeException("Hasher {$hashName} isn't instance of Illuminate\Contracts\Hashing\Hasher");
-		}
+        // Invalid hashing type
+        if (!class_exists($hasherClass)) {
+            $hasherClass = 'bcrypt';
+        }
 
-		return $i;
-	}
+        $hasher = $this->app->make($hasherClass);
+
+        if (!$hasher || !($hasher instanceof HasherContract)) {
+            throw new RuntimeException("Failed to initialise hasher '{$hasherClass}'");
+        }
+
+        return $hasher;
+    }
 }

@@ -1,43 +1,36 @@
-<?php namespace MyBB\Auth\Hashing;
+<?php
 
-use RuntimeException;
+namespace MyBB\Auth\Hashing;
+
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Hashing\BcryptHasher;
 
 class HashBcrypt implements HasherContract
 {
-	/**
-	 * A hasher is always singleton
-	 *
-	 * @var MyBB\Auth\Hashing\HashBcrypt
-	 */
-	private static $instance = null;
-	private function __construct() {}
-	public static function getInstance()
-	{
-		if(static::$instance == null)
-		{
-			static::$instance = new self();
-		}
+    /** @var BcryptHasher $hasher */
+    private $hasher;
 
-		return static::$instance;
-	}
 
-	/**
-	 * This is only a wrapper to use Laravel's Bcrypt hasher. Used like this to avoid special checks in the factory
-	 */
-	public function make($value, array $options = array())
-	{
-		return Hash::make($value, $options);
-	}
+    public function __construct(BcryptHasher $hasher)
+    {
+        $this->hasher = $hasher;
+    }
 
-	public function check($value, $hashedValue, array $options = array())
-	{
-		return Hash::check($value, $hashedValue, $options);
-	}
+    /**
+     * This is only a wrapper to use Laravel's Bcrypt hasher. Used like this to avoid special checks in the factory
+     */
+    public function make($value, array $options = array())
+    {
+        return $this->hasher->make($value, $options);
+    }
 
-	public function needsRehash($hashedValue, array $options = array())
-	{
-		return Hash::needsRehash($hashedValue, $options);
-	}
+    public function check($value, $hashedValue, array $options = array())
+    {
+        return $this->hasher->check($value, $hashedValue, $options);
+    }
+
+    public function needsRehash($hashedValue, array $options = array())
+    {
+        return $this->hasher->needsRehash($hashedValue, $options);
+    }
 }
