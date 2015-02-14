@@ -23,12 +23,10 @@ class AuthServiceProvider extends LaravelAuth
             $app['auth.loaded'] = true;
 
             return new AuthManager($app);
-        }
-        );
+        });
 
         $this->app->singleton('auth.driver', function ($app) {
             return $app['auth']->driver();
-        }
-        );
+        });
     }
 }
