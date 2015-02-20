@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "65dee9d3ef2e93d274310228a89f5c67",
+    "hash": "97f3eac85de3428669af5588a7969ffa",
     "packages": [
         {
             "name": "danielstjules/stringy",
@@ -135,12 +135,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/auth.git",
-                "reference": "85ab25f7bd8b16d2f19fa3a8f5cc5eff756ddd18"
+                "reference": "f07ede845edba9f94e2b947a40f1aed449817b54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/auth/zipball/85ab25f7bd8b16d2f19fa3a8f5cc5eff756ddd18",
-                "reference": "85ab25f7bd8b16d2f19fa3a8f5cc5eff756ddd18",
+                "url": "https://api.github.com/repos/illuminate/auth/zipball/f07ede845edba9f94e2b947a40f1aed449817b54",
+                "reference": "f07ede845edba9f94e2b947a40f1aed449817b54",
                 "shasum": ""
             },
             "require": {
@@ -176,7 +176,7 @@
                 }
             ],
             "description": "The Illuminate Auth package.",
-            "time": "2015-01-29 21:57:23"
+            "time": "2015-02-16 03:34:34"
         },
         {
             "name": "illuminate/contracts",

@@ -47,11 +47,16 @@ class HashFactory implements HasherContract
      */
     protected function getHasher($hashName = 'bcrypt')
     {
+        if(empty($hashName))
+        {
+            $hashName = 'bcrypt';
+        }
+
         $hasherClass = 'MyBB\\Auth\\Hashing\\Hash' . ucfirst($hashName);
 
         // Invalid hashing type
         if (!class_exists($hasherClass)) {
-            $hasherClass = 'MyBB\\Auth\\Hashing\\HashBcrypt';
+            throw new RuntimeException("Hasher '{$hasherClass}' does not exist");
         }
 
         $hasher = $this->app->make($hasherClass);
