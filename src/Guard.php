@@ -42,4 +42,15 @@ class Guard extends IlluminateGuard implements GuardContract
 
 		return $user;
 	}
+
+	/**
+	 * Determine if the current user is authenticated.
+	 *
+	 * @return bool
+	 */
+	public function check()
+	{
+		$parentAns = parent::check();
+		return $parentAns && ($this->user() != $this->defaultUser);
+	}
 }
