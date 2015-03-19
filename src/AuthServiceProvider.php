@@ -48,5 +48,7 @@ class AuthServiceProvider extends LaravelAuth
 		$this->app->singleton('auth.driver', function ($app) {
 			return $app['auth']->driver();
 		});
+		
+		$this->app->alias('auth.driver', 'MyBB\Auth\Contracts\Guard');
 	}
 }
