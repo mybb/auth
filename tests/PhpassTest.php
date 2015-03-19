@@ -1,8 +1,8 @@
 <?php
 
-class Phpbb3Test extends PHPUnit_Framework_TestCase  {
-	private $hash = '$H$9H.SIOoJJeV84/fEla5e6iD969pzUP1';
-	private $utf8_hash = '$H$91/RaaGT7AdVorKIgiqYSlwY0tQJ88/';
+class PhpassTest extends PHPUnit_Framework_TestCase  {
+	private $hash = '$P$BxlUyAJ0Nz3sCU1YLlqjcOdzZ2m2wa1';
+	private $utf8_hash = '$P$B2qcq0GdT9.K18G1vW8sHrMzpbMagb/';
 	private $password = 'thisismypassword';
 
 	private $hasher;
@@ -10,13 +10,13 @@ class Phpbb3Test extends PHPUnit_Framework_TestCase  {
 	public function __construct()
 	{
 		require_once __DIR__.'/../vendor/illuminate/contracts/Hashing/Hasher.php';
-		require_once __DIR__.'/../src/Hashing/HashPhpbb3.php';
 		require_once __DIR__.'/../src/Hashing/phpass/PasswordHash.php';
+		require_once __DIR__.'/../src/Hashing/HashPhpass.php';
 
 		$phpass = new \MyBB\Auth\Hashing\phpass\PasswordHash(8, true);
 		$phpass->PasswordHash(8, true);
 
-		$this->hasher = new \MyBB\Auth\Hashing\HashPhpbb3($phpass);
+		$this->hasher = new \MyBB\Auth\Hashing\HashPhpass($phpass);
 	}
 
 
@@ -32,7 +32,7 @@ class Phpbb3Test extends PHPUnit_Framework_TestCase  {
 
 	public function testGenerateAndValidate()
 	{
-		$hash = $this->hasher->make($this->password, ['hasher' => '3.0']);
+		$hash = $this->hasher->make($this->password);
 
 		$this->assertTrue($this->hasher->check($this->password, $hash));
 	}

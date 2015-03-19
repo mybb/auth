@@ -34,6 +34,9 @@ class HashSmf implements HasherContract
 		}
 		else
 		{
+			// Prefix the password with the username as SMF 2.1 does
+			$value = strtolower($options['name']).$value;
+
 			// Nothing so see here, SMF's way of creating a salt
 
 			// The length of salt to generate
@@ -99,13 +102,15 @@ class HashSmf implements HasherContract
 
 	public function check($value, $hashedValue, array $options = array())
 	{
+		if(empty($options['name']))
+		{
+			throw new RuntimeException("No username specified");
+		}
+
+		$is_sha1 = false;
 		if(strlen($hashedValue) == 40)
 		{
 			$is_sha1 = true;
-		}
-		else
-		{
-			$is_sha1 = false;
 		}
 
 		if($is_sha1 && sha1(strtolower($options['name']).$value) == $hashedValue)
@@ -114,7 +119,8 @@ class HashSmf implements HasherContract
 		}
 		else
 		{
-			if(crypt($value, $hashedValue) == $hashedValue)
+			// Prefix the password with the username as SMF 2.1 does
+			if(crypt(strtolower($options['name']).$value, $hashedValue) == $hashedValue)
 			{
 				return true;
 			}

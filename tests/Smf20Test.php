@@ -1,6 +1,6 @@
 <?php
 
-class SmfTest extends PHPUnit_Framework_TestCase  {
+class Smf20Test extends PHPUnit_Framework_TestCase  {
 	private $hash = 'c73ba2982c55b7ead0e4098a92f722bdb3a3b3d8';
 	private $name = 'User';
 	private $utf8_hash = 'fb10111f401c01599157efc637c9cd0dd9870ea0';
@@ -20,18 +20,18 @@ class SmfTest extends PHPUnit_Framework_TestCase  {
 
 	public function testHash()
 	{
-		$this->assertTrue($this->hasher->check('password', $this->hash, ['name' => $this->name]));
+		$this->assertTrue($this->hasher->check('password', $this->hash, ['name' => $this->name, 'hasher' => '2.0']));
 	}
 
 	public function testUtf8Hash()
 	{
-		$this->assertTrue($this->hasher->check('pässwörd', $this->utf8_hash, ['name' => $this->utf8_name]));
+		$this->assertTrue($this->hasher->check('pässwörd', $this->utf8_hash, ['name' => $this->utf8_name, 'hasher' => '2.0']));
 	}
 
 	public function testGenerateAndValidate()
 	{
-		$hash = $this->hasher->make($this->password, ['name' => $this->name]);
+		$hash = $this->hasher->make($this->password, ['name' => $this->name, 'hasher' => '2.0']);
 
-		$this->assertTrue($this->hasher->check($this->password, $hash, ['name' => $this->name]));
+		$this->assertTrue($this->hasher->check($this->password, $hash, ['name' => $this->name, 'hasher' => '2.0']));
 	}
 }

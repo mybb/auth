@@ -10,8 +10,9 @@ class BbpressTest extends PHPUnit_Framework_TestCase  {
 	public function __construct()
 	{
 		require_once __DIR__.'/../vendor/illuminate/contracts/Hashing/Hasher.php';
-		require_once __DIR__.'/../src/Hashing/HashBbpress.php';
 		require_once __DIR__.'/../src/Hashing/phpass/PasswordHash.php';
+		require_once __DIR__.'/../src/Hashing/HashPhpass.php';
+		require_once __DIR__.'/../src/Hashing/HashBbpress.php';
 
 		$phpass = new \MyBB\Auth\Hashing\phpass\PasswordHash(8, true);
 		$phpass->PasswordHash(8, true);

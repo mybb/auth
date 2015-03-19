@@ -1,5 +1,6 @@
 <?php
 
+// TODO: WCF 1 has a lot of settings, add new test (cases) for them and generate original passwords
 class Wcf1Test extends PHPUnit_Framework_TestCase  {
     private $hash = 'dd03ae9f52883b374695e5b541c9490ed4ba9d08';
     private $salt = '5650b3ce4bf73d4862de7cb92e730e88a27fa533';

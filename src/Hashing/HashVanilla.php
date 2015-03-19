@@ -10,35 +10,18 @@ use MyBB\Auth\Hashing\phpass\PasswordHash;
  *
  * @package MyBB\Auth
  */
-class HashVanilla implements HasherContract
+class HashVanilla extends HashPhpass
 {
-	private $phpass;
-
-	public function __construct(PasswordHash $phpass)
-	{
-		$this->phpass = $phpass;
-	}
-
-	public function make($value, array $options = array())
-	{
-		return $this->phpass->HashPassword($value);
-	}
-
 	public function check($value, $hashedValue, array $options = array())
 	{
 		if($hashedValue[0] === '_' || $hashedValue[0] === '$')
 		{
-			return $this->phpass->CheckPassword($value, $hashedValue);
+			return parent::check($value, $hashedValue, $options);
 		}
 		elseif($value && $hashedValue !== '*' && ($value === $hashedValue || md5($value) === $hashedValue))
 		{
 			return true;
 		}
-		return false;
-	}
-
-	public function needsRehash($hashedValue, array $options = array())
-	{
 		return false;
 	}
 }

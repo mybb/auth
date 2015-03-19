@@ -15,8 +15,7 @@ class IpbTest extends PHPUnit_Framework_TestCase  {
         require_once __DIR__.'/../src/Hashing/HashMybb1.php';
         require_once __DIR__.'/../src/Hashing/HashIpb.php';
 
-        $mybb = new \MyBB\Auth\Hashing\HashMybb1();
-        $this->hasher = new \MyBB\Auth\Hashing\HashIpb($mybb);
+        $this->hasher = new \MyBB\Auth\Hashing\HashIpb();
     }
 
 
