@@ -3,6 +3,7 @@
 namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
+use MyBB\Auth\Exceptions\HasherNoSaltException;
 use RuntimeException;
 
 /**
@@ -20,7 +21,7 @@ class HashIpb4 implements HasherContract
     {
         // We need a salt to use ipb's hashing algorithm - as we don't generate one here we're throwing an error
         if (empty($options['salt'])) {
-            throw new RuntimeException("No salt specified");
+            throw new HasherNoSaltException;
         }
 
         return crypt($value, '$2a$13$'.$options['salt']);

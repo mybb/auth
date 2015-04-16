@@ -3,6 +3,7 @@
 namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
+use MyBB\Auth\Exceptions\HasherNoUsernameException;
 use RuntimeException;
 
 /**
@@ -16,7 +17,7 @@ class HashSmf implements HasherContract
 	{
 		if(empty($options['name']))
 		{
-			throw new RuntimeException("No username specified");
+			throw new HasherNoUsernameException;
 		}
 
 		if(!isset($options['hasher']))
@@ -104,7 +105,7 @@ class HashSmf implements HasherContract
 	{
 		if(empty($options['name']))
 		{
-			throw new RuntimeException("No username specified");
+			throw new HasherNoUsernameException;
 		}
 
 		$is_sha1 = false;

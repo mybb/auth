@@ -5,6 +5,7 @@ namespace MyBB\Auth;
 use Illuminate\Auth\EloquentUserProvider as LaravelUser;
 use Illuminate\Contracts\Auth\Authenticatable as LaravelUserContract;
 use MyBB\Auth\Contracts\UserContract;
+use MyBB\Auth\Exceptions\AuthNotMybbInstanceException;
 
 class EloquentUserProvider extends LaravelUser
 {
@@ -24,7 +25,7 @@ class EloquentUserProvider extends LaravelUser
     {
         // Check whether it's a MyBB valid user
         if (!($user instanceof UserContract)) {
-            throw new \RuntimeException('User is not instance of MyBB\\Auth\\Contracts\\UserContract');
+            throw new AuthNotMybbInstanceException;
         }
 
         $plain = $credentials['password'];
