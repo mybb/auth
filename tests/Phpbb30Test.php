@@ -1,6 +1,7 @@
 <?php
 
-class Phpbb30Test extends PHPUnit_Framework_TestCase  {
+class Phpbb30Test extends PHPUnit_Framework_TestCase
+{
 	private $hash = '$H$9H.SIOoJJeV84/fEla5e6iD969pzUP1';
 	private $utf8_hash = '$H$91/RaaGT7AdVorKIgiqYSlwY0tQJ88/';
 	private $password = 'thisismypassword';

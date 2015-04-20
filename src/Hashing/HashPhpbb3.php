@@ -21,10 +21,9 @@ class HashPhpbb3 implements HasherContract
 
 	public function make($value, array $options = array())
 	{
-		if(isset($options['hasher']) && $options['hasher'] == '3.0')
+		if (isset($options['hasher']) && $options['hasher'] == '3.0') {
 			return $this->phpass->HashPassword($value);
-		else
-		{
+		} else {
 			// phpBB 3.1 still uses phpass to generate the salt - though they renamed the functions
 			$salt = '$2y$10$' . $this->phpass->encode64($this->phpass->get_random_bytes(22), 22);
 
@@ -35,18 +34,13 @@ class HashPhpbb3 implements HasherContract
 	public function check($value, $hashedValue, array $options = array())
 	{
 		// The bcrypt hash is at least 60 chars and is used in phpBB 3.1
-		if (strlen($hashedValue) >= 60 && $hashedValue == crypt($value, $hashedValue))
-		{
+		if (strlen($hashedValue) >= 60 && $hashedValue == crypt($value, $hashedValue)) {
 			return true;
-		}
-		// In 3.0 they used phpass
-		else if (strlen($hashedValue) == 34)
-		{
+		} // In 3.0 they used phpass
+		elseif (strlen($hashedValue) == 34) {
 			return $this->phpass->CheckPassword($value, $hashedValue);
-		}
-		// Before that basic md5 was used
-		else
-		{
+		} // Before that basic md5 was used
+		else {
 			return md5($value) === $hashedValue;
 		}
 	}

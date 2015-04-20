@@ -1,6 +1,7 @@
 <?php
 
-class VanillaTest extends PHPUnit_Framework_TestCase  {
+class VanillaTest extends PHPUnit_Framework_TestCase
+{
 	private $hash = '$P$BaAvfJWlUGFb.7Gnmt1u4n4L5qkjn71';
 	private $utf8_hash = '$P$B5mMvHVW.jdJ9gU873O4hjcnDu5m5N1';
 	private $password = 'thisismypassword';

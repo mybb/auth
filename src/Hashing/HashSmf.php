@@ -14,26 +14,19 @@ class HashSmf implements HasherContract
 {
 	public function make($value, array $options = array())
 	{
-		if(empty($options['name']))
-		{
+		if (empty($options['name'])) {
 			throw new RuntimeException("No username specified");
 		}
 
-		if(!isset($options['hasher']))
-		{
+		if (!isset($options['hasher'])) {
 			$options['hasher'] = '2.1';
 		}
 
-		if($options['hasher'] == '2.0')
-		{
+		if ($options['hasher'] == '2.0') {
 			return $this->md5_hmac($options['name'], $value);
-		}
-		elseif($options['hasher'] == 'sha1')
-		{
+		} elseif ($options['hasher'] == 'sha1') {
 			return sha1(strtolower($options['name']).$value);
-		}
-		else
-		{
+		} else {
 			// Prefix the password with the username as SMF 2.1 does
 			$value = strtolower($options['name']).$value;
 
@@ -102,41 +95,32 @@ class HashSmf implements HasherContract
 
 	public function check($value, $hashedValue, array $options = array())
 	{
-		if(empty($options['name']))
-		{
+		if (empty($options['name'])) {
 			throw new RuntimeException("No username specified");
 		}
 
 		$is_sha1 = false;
-		if(strlen($hashedValue) == 40)
-		{
+		if (strlen($hashedValue) == 40) {
 			$is_sha1 = true;
 		}
 
-		if($is_sha1 && sha1(strtolower($options['name']).$value) == $hashedValue)
-		{
+		if ($is_sha1 && sha1(strtolower($options['name']).$value) == $hashedValue) {
 			return true;
-		}
-		else
-		{
+		} else {
 			// Prefix the password with the username as SMF 2.1 does
-			if(crypt(strtolower($options['name']).$value, $hashedValue) == $hashedValue)
-			{
+			if (crypt(strtolower($options['name']).$value, $hashedValue) == $hashedValue) {
 				return true;
-			}
-			elseif(strlen($hashedValue) == 32 && $this->md5_hmac($options['name'], $value) == $hashedValue)
-			{
+			} elseif (strlen($hashedValue) == 32 && $this->md5_hmac($options['name'], $value) == $hashedValue) {
 				return true;
-			}
-			elseif(strlen($hashedValue) == 32 && md5($value) == $hashedValue)
-			{
+			} elseif (strlen($hashedValue) == 32 && md5($value) == $hashedValue) {
 				return true;
 			}
 		}
 
 		// While we encode everything in utf8, smf doesn't do so by default so if we have a different utf8 representation of the password we try that too
-		if (utf8_decode($value) !== $value)
+		if (utf8_decode($value) !== $value) {
 			return $this->check(utf8_decode($value), $hashedValue, $options);
+		}
 
 		return false;
 	}
@@ -148,8 +132,7 @@ class HashSmf implements HasherContract
 
 	private function md5_hmac($username, $password)
 	{
-		if(strlen($username) > 64)
-		{
+		if (strlen($username) > 64) {
 			$username = pack('H*', md5($username));
 		}
 		$username = str_pad($username, 64, chr(0x00));

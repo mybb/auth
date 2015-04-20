@@ -48,7 +48,9 @@ class AuthManager extends LaravelManager
 	{
 		$custom = parent::callCustomCreator($driver);
 
-		if ($custom instanceof \Illuminate\Contracts\Auth\Guard) return $custom;
+		if ($custom instanceof \Illuminate\Contracts\Auth\Guard) {
+			return $custom;
+		}
 
 		return new Guard($custom, $this->app['session.store']);
 	}

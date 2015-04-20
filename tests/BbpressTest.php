@@ -1,6 +1,7 @@
 <?php
 
-class BbpressTest extends PHPUnit_Framework_TestCase  {
+class BbpressTest extends PHPUnit_Framework_TestCase
+{
 	private $hash = '$P$BFY.vYwADSzYYTn.eiSaW/E6hxcmGX1';
 	private $utf8_hash = '$P$Bks.1dvVd1JIVmaIpQxJHf2.BTvzrM.';
 	private $password = 'thisismypassword';

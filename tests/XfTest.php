@@ -1,6 +1,7 @@
 <?php
 
-class XfTest extends PHPUnit_Framework_TestCase  {
+class XfTest extends PHPUnit_Framework_TestCase
+{
 	private $hash = '$2a$10$DfcgH9Z99.JMXN4kk33nQeKk2bI4/8jdN4HsDQt/J4Qc8T8MHtjV2';
 	private $utf8_hash = '$2a$10$1L8KDRVa49bG7fwxPDxr1eLqGVRNW1OXrPthKgLbejfMf14xHXEna';
 	private $password = 'thisismypassword';

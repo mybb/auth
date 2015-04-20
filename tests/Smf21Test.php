@@ -1,6 +1,7 @@
 <?php
 
-class Smf21Test extends PHPUnit_Framework_TestCase  {
+class Smf21Test extends PHPUnit_Framework_TestCase
+{
 	private $hash = '$2y$13$HxdgIIWdxd6HSl8.5BCS8urINNi/HHN9sbwQ57TEJj5R0j25iK1W6';
 	private $name = 'User';
 	private $utf8_hash = '$2y$13$/MdC5inL/yBg3DGprSLiQuZo3PPxWy5OuKE4EH2ffMcVbu4DZnuxK';

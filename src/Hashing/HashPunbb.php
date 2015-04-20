@@ -30,24 +30,16 @@ class HashPunbb implements HasherContract
 
 	public function check($value, $hashedValue, array $options = array())
 	{
-		if(strlen($hashedValue) == 40)
-		{
+		if (strlen($hashedValue) == 40) {
 			$is_sha1 = true;
-		}
-		else
-		{
+		} else {
 			$is_sha1 = false;
 		}
-		if(function_exists('sha1') && $is_sha1 && (sha1($value) == $hashedValue || sha1($options['salt'].sha1($value)) == $hashedValue))
-		{
+		if (function_exists('sha1') && $is_sha1 && (sha1($value) == $hashedValue || sha1($options['salt'].sha1($value)) == $hashedValue)) {
 			return true;
-		}
-		elseif(function_exists('mhash') && $is_sha1 && (bin2hex(mhash(MHASH_SHA1, $value)) == $hashedValue || bin2hex(mhash(MHASH_SHA1, $options['salt'].bin2hex(mhash(MHASH_SHA1, $value)))) == $hashedValue))
-		{
+		} elseif (function_exists('mhash') && $is_sha1 && (bin2hex(mhash(MHASH_SHA1, $value)) == $hashedValue || bin2hex(mhash(MHASH_SHA1, $options['salt'].bin2hex(mhash(MHASH_SHA1, $value)))) == $hashedValue)) {
 			return true;
-		}
-		else
-		{
+		} else {
 			return md5($value) == $hashedValue;
 		}
 	}
