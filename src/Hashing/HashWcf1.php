@@ -3,7 +3,7 @@
 namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-use RuntimeException;
+use MyBB\Auth\Exceptions\HasherNoSaltException;
 
 /**
  * Hasher for legacy WCF 1 passwords, using the following algorithm:
@@ -14,6 +14,7 @@ use RuntimeException;
 class HashWcf1 implements HasherContract
 {
 	const SALT_POS_BEFORE = 'before';
+
 	const SALT_POS_AFTER = 'after';
 
 	const ENABLE_SALT = 'encryption_enable_salting';
@@ -28,7 +29,7 @@ class HashWcf1 implements HasherContract
 	{
 		// We need a salt to use wcf1's hashing algorithm - as we don't generate one here we're throwing an error
 		if (empty($options['salt'])) {
-			throw new RuntimeException("No salt specified");
+			throw new HasherNoSaltException;
 		}
 
 		$options = array_merge(

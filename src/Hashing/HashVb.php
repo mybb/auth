@@ -3,7 +3,7 @@
 namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-use RuntimeException;
+use MyBB\Auth\Exceptions\HasherNoSaltException;
 
 /**
  * Hasher for legacy vB passwords, using the following algorithm:
@@ -23,7 +23,7 @@ class HashVb implements HasherContract
 	{
 		// We need a salt to use vb's hashing algorithm - as we don't generate one here we're throwing an error
 		if (empty($options['salt'])) {
-			throw new RuntimeException("No salt specified");
+			throw new HasherNoSaltException;
 		}
 
 		return md5(md5($value) . $options['salt']);
@@ -36,7 +36,7 @@ class HashVb implements HasherContract
 	{
 		// We need a salt to use vb's hashing algorithm - as we don't generate one here we're throwing an error
 		if (empty($options['salt'])) {
-			throw new RuntimeException("No salt specified");
+			throw new HasherNoSaltException;
 		}
 
 		if ($hashedValue == $this->make($value, $options)) {

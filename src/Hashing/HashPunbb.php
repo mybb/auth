@@ -3,7 +3,7 @@
 namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-use RuntimeException;
+use MyBB\Auth\Exceptions\HasherNoSaltException;
 
 /**
  * Hasher for legacy PunBB passwords, using the following algorithm:
@@ -25,7 +25,7 @@ class HashPunbb implements HasherContract
 	{
 		// We need a salt to use punbb's hashing algorithm - as we don't generate one here we're throwing an error
 		if (empty($options['salt'])) {
-			throw new RuntimeException("No salt specified");
+			throw new HasherNoSaltException;
 		}
 
 		return sha1($options['salt'] . sha1($value));

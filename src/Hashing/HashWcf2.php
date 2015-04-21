@@ -3,7 +3,7 @@
 namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-use RuntimeException;
+use MyBB\Auth\Exceptions\HasherNoSaltException;
 
 /**
  * Hasher for legacy WCF 2 passwords, using the following algorithm:
@@ -23,7 +23,7 @@ class HashWcf2 implements HasherContract
 	{
 		// We need a salt to use wcf2's hashing algorithm - as we don't generate one here we're throwing an error
 		if (empty($options['salt'])) {
-			throw new RuntimeException("No salt specified");
+			throw new HasherNoSaltException;
 		}
 
 		return crypt(crypt($value, $options['salt']), $options['salt']);

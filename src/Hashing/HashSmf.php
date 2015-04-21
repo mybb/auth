@@ -3,7 +3,7 @@
 namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-use RuntimeException;
+use MyBB\Auth\Exceptions\HasherNoUsernameException;
 
 /**
  * Hasher for legacy SMF passwords, using different algorithms in different versions
@@ -19,7 +19,7 @@ class HashSmf implements HasherContract
 	public function make($value, array $options = array())
 	{
 		if (empty($options['name'])) {
-			throw new RuntimeException("No username specified");
+			throw new HasherNoUsernameException;
 		}
 
 		if (!isset($options['hasher'])) {
@@ -103,7 +103,7 @@ class HashSmf implements HasherContract
 	public function check($value, $hashedValue, array $options = array())
 	{
 		if (empty($options['name'])) {
-			throw new RuntimeException("No username specified");
+			throw new HasherNoUsernameException;
 		}
 
 		$is_sha1 = false;

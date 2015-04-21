@@ -2,7 +2,8 @@
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-use RuntimeException;
+use MyBB\Auth\Exceptions\HasherNotExistingException;
+use MyBB\Auth\Exceptions\HasherNotInitialisableException;
 
 class HashFactory implements HasherContract
 {
@@ -66,13 +67,13 @@ class HashFactory implements HasherContract
 
 		// Invalid hashing type
 		if (!class_exists($hasherClass)) {
-			throw new RuntimeException("Hasher '{$hasherClass}' does not exist");
+			throw new HasherNotExistingException($hasherClass);
 		}
 
 		$hasher = $this->app->make($hasherClass);
 
 		if (!$hasher || !($hasher instanceof HasherContract)) {
-			throw new RuntimeException("Failed to initialise hasher '{$hasherClass}'");
+			throw new HasherNotInitialisableException($hasherClass);
 		}
 
 		return $hasher;
