@@ -21,6 +21,9 @@ class HashWcf1 implements HasherContract
 	const ENCRYPT_BEFORE_SALTING = 'encryption_encrypt_before_salting';
 	const HASHING_METHOD = 'encryption_method';
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function make($value, array $options = array())
 	{
 		// We need a salt to use wcf1's hashing algorithm - as we don't generate one here we're throwing an error
@@ -38,19 +41,34 @@ class HashWcf1 implements HasherContract
 			$options
 		);
 
-		return $this->encrypt($options['salt'] . $this->hash($value, $options['salt'], $options), $options[static::HASHING_METHOD]);
+		return $this->encrypt(
+			$options['salt'] . $this->hash($value, $options['salt'], $options),
+			$options[static::HASHING_METHOD]
+		);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function check($value, $hashedValue, array $options = array())
 	{
 		return ($hashedValue == $this->make($value, $options));
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function needsRehash($hashedValue, array $options = array())
 	{
 		return false;
 	}
 
+	/**
+	 * @param string $value
+	 * @param string $method
+	 *
+	 * @return int|string
+	 */
 	private function encrypt($value, $method)
 	{
 		switch ($method) {
@@ -65,7 +83,14 @@ class HashWcf1 implements HasherContract
 		}
 	}
 
-	private function hash($value, $salt, $settings)
+	/**
+	 * @param string $value
+	 * @param string $salt
+	 * @param array  $settings
+	 *
+	 * @return int|string
+	 */
+	private function hash($value, $salt, array $settings)
 	{
 		if ($settings[static::ENABLE_SALT]) {
 			$hash = '';

@@ -12,6 +12,10 @@ use RuntimeException;
  */
 class HashSmf implements HasherContract
 {
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function make($value, array $options = array())
 	{
 		if (empty($options['name'])) {
@@ -23,7 +27,7 @@ class HashSmf implements HasherContract
 		}
 
 		if ($options['hasher'] == '2.0') {
-			return $this->md5_hmac($options['name'], $value);
+			return $this->md5Hmac($options['name'], $value);
 		} elseif ($options['hasher'] == 'sha1') {
 			return sha1(strtolower($options['name']).$value);
 		} else {
@@ -93,6 +97,9 @@ class HashSmf implements HasherContract
 		}
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function check($value, $hashedValue, array $options = array())
 	{
 		if (empty($options['name'])) {
@@ -110,14 +117,15 @@ class HashSmf implements HasherContract
 			// Prefix the password with the username as SMF 2.1 does
 			if (crypt(strtolower($options['name']).$value, $hashedValue) == $hashedValue) {
 				return true;
-			} elseif (strlen($hashedValue) == 32 && $this->md5_hmac($options['name'], $value) == $hashedValue) {
+			} elseif (strlen($hashedValue) == 32 && $this->md5Hmac($options['name'], $value) == $hashedValue) {
 				return true;
 			} elseif (strlen($hashedValue) == 32 && md5($value) == $hashedValue) {
 				return true;
 			}
 		}
 
-		// While we encode everything in utf8, smf doesn't do so by default so if we have a different utf8 representation of the password we try that too
+		// While we encode everything in utf8, smf doesn't do so by default
+		// so if we have a different utf8 representation of the password we try that too
 		if (utf8_decode($value) !== $value) {
 			return $this->check(utf8_decode($value), $hashedValue, $options);
 		}
@@ -125,12 +133,21 @@ class HashSmf implements HasherContract
 		return false;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function needsRehash($hashedValue, array $options = array())
 	{
 		return false;
 	}
 
-	private function md5_hmac($username, $password)
+	/**
+	 * @param string $username
+	 * @param string $password
+	 *
+	 * @return string
+	 */
+	private function md5Hmac($username, $password)
 	{
 		if (strlen($username) > 64) {
 			$username = pack('H*', md5($username));

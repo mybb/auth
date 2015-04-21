@@ -2,12 +2,30 @@
 
 class PunbbTest extends PHPUnit_Framework_TestCase
 {
+	/**
+	 * @var string
+	 */
 	private $hash = 'cf7b0ed34828fcbde66b671e90b1d6c2fd6e57eb';
+	/**
+	 * @var string
+	 */
 	private $salt = 'rF949)%).$@G';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = 'd1e8e70b7abba4698e671099b7d83f8b819017e3';
+	/**
+	 * @var string
+	 */
 	private $utf8_salt = 'BF*cL1%zI8T4';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashPunbb
+	 */
 	private $hasher;
 
 	public function __construct()

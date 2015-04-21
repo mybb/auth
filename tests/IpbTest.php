@@ -2,12 +2,30 @@
 
 class IpbTest extends PHPUnit_Framework_TestCase
 {
+	/**
+	 * @var string
+	 */
 	private $hash = '7e6f3724d991b5b7c96411abfcb7928c';
+	/**
+	 * @var string
+	 */
 	private $salt = 'GN53]';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = 'b794917b289e73dbe67d90c02c501173';
+	/**
+	 * @var string
+	 */
 	private $utf8_salt = '2$![1';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashIpb
+	 */
 	private $hasher;
 
 	public function __construct()

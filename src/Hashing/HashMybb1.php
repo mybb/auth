@@ -16,6 +16,9 @@ use RuntimeException;
  */
 class HashMybb1 implements HasherContract
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function make($value, array $options = array())
 	{
 		// We need a salt to use mybb 1.x hashing algorithm - as we don't generate one here we're throwing an error
@@ -26,11 +29,17 @@ class HashMybb1 implements HasherContract
 		return md5(md5($options['salt']) . md5($value));
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function check($value, $hashedValue, array $options = array())
 	{
 		return ($hashedValue == $this->make($value, $options));
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function needsRehash($hashedValue, array $options = array())
 	{
 		return false;

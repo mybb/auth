@@ -11,6 +11,9 @@ use Illuminate\Contracts\Hashing\Hasher as HasherContract;
  */
 class HashIpb extends HashMybb1
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function make($value, array $options = array())
 	{
 		// This is IPB's way of filtering input - the rest of the hashing is the same we use

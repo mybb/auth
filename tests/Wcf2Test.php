@@ -2,12 +2,30 @@
 
 class Wcf2Test extends PHPUnit_Framework_TestCase
 {
+	/**
+	 * @var string
+	 */
 	private $hash = '$2a$08$GpZxdMN7ALevHBBMYl.DWOrJZ4h/zLAXRTrucTMhZFK3oowDwl5Ne';
+	/**
+	 * @var string
+	 */
 	private $salt = 'GpZxdMN7ALevHBBMYl';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = '$2a$08$TwmAsMQ2.Bs1mUmlLPcgNejptHSSvYvr6nbDKsEGOhg9VVi1wKD62';
+	/**
+	 * @var string
+	 */
 	private $utf8_salt = 'TwmAsMQ2.Bs1mUmlLP';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashWcf2
+	 */
 	private $hasher;
 
 	public function __construct()

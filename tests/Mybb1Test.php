@@ -2,12 +2,30 @@
 
 class Mybb1Test extends PHPUnit_Framework_TestCase
 {
+	/**
+	 * @var string
+	 */
 	private $hash = '9bab3ea951024a935075ca5c9ef6d42d';
+	/**
+	 * @var string
+	 */
 	private $salt = '1QI52qWp';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = '93692cf2eaee0df690031a79b4511df9';
+	/**
+	 * @var string
+	 */
 	private $utf8_salt = 'Emxu7r8j';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashMybb1
+	 */
 	private $hasher;
 
 	public function __construct()

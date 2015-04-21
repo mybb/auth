@@ -2,12 +2,30 @@
 
 class Ipb4Test extends PHPUnit_Framework_TestCase
 {
+	/**
+	 * @var string
+	 */
 	private $hash = '$2a$13$KbKf1LS4r6GC6QQS7eqmz.aGrfSCGLD664Q3LhLLskVGOiXa9dPs2';
+	/**
+	 * @var string
+	 */
 	private $salt = 'KbKf1LS4r6GC6QQS7eqmzF';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = '$2a$13$dHs7VNqIXxO9pfB00T1pMeKtcpFe.83os230MSomdbJnSrzL6icgm';
+	/**
+	 * @var string
+	 */
 	private $utf8_salt = 'dHs7VNqIXxO9pfB00T1pMj';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashIpb4
+	 */
 	private $hasher;
 
 	public function __construct()

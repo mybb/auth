@@ -12,6 +12,9 @@ use MyBB\Auth\Hashing\phpass\PasswordHash;
  */
 class HashVanilla extends HashPhpass
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function check($value, $hashedValue, array $options = array())
 	{
 		if ($hashedValue[0] === '_' || $hashedValue[0] === '$') {

@@ -2,10 +2,22 @@
 
 class Phpbb31Test extends PHPUnit_Framework_TestCase
 {
+	/**
+	 * @var string
+	 */
 	private $hash = '$2y$10$IBq.6Nm7TQtQD9hlwOvO5OhfmgaWM7uMldUXDuTC0V8T1Q.tCuQvW';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = '$2y$10$7AeF8MAYfdr9UhQpAXfT1OfrTtMyQj97.VWTn77mbL7uXl.OSkeC2';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashPhpbb3
+	 */
 	private $hasher;
 
 	public function __construct()

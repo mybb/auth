@@ -6,7 +6,9 @@ use RuntimeException;
 
 class HashFactory implements HasherContract
 {
-	/** @var Application $app */
+	/**
+	 * @var Application
+	 */
 	private $app;
 
 	/**
@@ -17,6 +19,9 @@ class HashFactory implements HasherContract
 		$this->app = $app;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function make($value, array $options = array())
 	{
 		$hasher = $this->getHasher($options['type']);
@@ -24,6 +29,9 @@ class HashFactory implements HasherContract
 		return $hasher->make($value, $options);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function check($value, $hashedValue, array $options = array())
 	{
 		$hasher = $this->getHasher($options['type']);
@@ -31,6 +39,9 @@ class HashFactory implements HasherContract
 		return $hasher->check($value, $hashedValue, $options);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function needsRehash($hashedValue, array $options = array())
 	{
 		$hasher = $this->getHasher($options['type']);

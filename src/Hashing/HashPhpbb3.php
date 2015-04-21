@@ -12,13 +12,22 @@ use MyBB\Auth\Hashing\phpass\PasswordHash;
  */
 class HashPhpbb3 implements HasherContract
 {
+	/**
+	 * @var PasswordHash
+	 */
 	private $phpass;
 
+	/**
+	 * @param PasswordHash $phpass
+	 */
 	public function __construct(PasswordHash $phpass)
 	{
 		$this->phpass = $phpass;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function make($value, array $options = array())
 	{
 		if (isset($options['hasher']) && $options['hasher'] == '3.0') {
@@ -31,6 +40,9 @@ class HashPhpbb3 implements HasherContract
 		}
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function check($value, $hashedValue, array $options = array())
 	{
 		// The bcrypt hash is at least 60 chars and is used in phpBB 3.1
@@ -45,6 +57,9 @@ class HashPhpbb3 implements HasherContract
 		}
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function needsRehash($hashedValue, array $options = array())
 	{
 		return false;

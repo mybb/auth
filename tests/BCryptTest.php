@@ -2,10 +2,22 @@
 
 class BCryptTest extends PHPUnit_Framework_TestCase
 {
+	/**
+	 * @var string
+	 */
 	private $hash = '$2y$10$piBefrVszhfeZ7Jk8yLlYulIqTWziP3SdNYYdntPOVROtQ/S2m2Ky';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = '$2y$10$y3QFHbnXU4aY4hTlNIPfaukMXv9T23KNV5rPlGAud5idizsEQyEGe';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashBcrypt
+	 */
 	private $hasher;
 
 	public function __construct()

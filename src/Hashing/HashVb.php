@@ -16,6 +16,9 @@ use RuntimeException;
  */
 class HashVb implements HasherContract
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function make($value, array $options = array())
 	{
 		// We need a salt to use vb's hashing algorithm - as we don't generate one here we're throwing an error
@@ -26,6 +29,9 @@ class HashVb implements HasherContract
 		return md5(md5($value) . $options['salt']);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function check($value, $hashedValue, array $options = array())
 	{
 		// We need a salt to use vb's hashing algorithm - as we don't generate one here we're throwing an error
@@ -40,7 +46,8 @@ class HashVb implements HasherContract
 			return true;
 		}
 
-		// While we encode everything in utf8, vb doesn't do so by default so if we have a different utf8 representation of the password we try that too
+		// While we encode everything in utf8, vb doesn't do so by default
+		// so if we have a different utf8 representation of the password we try that too
 		if (utf8_decode($value) !== $value) {
 			return $this->check(utf8_decode($value), $hashedValue, $options);
 		}
@@ -48,6 +55,9 @@ class HashVb implements HasherContract
 		return false;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function needsRehash($hashedValue, array $options = array())
 	{
 		return false;
