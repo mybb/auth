@@ -12,14 +12,14 @@ use MyBB\Auth\Hashing\phpass\PasswordHash;
  */
 class HashVanilla extends HashPhpass
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function check($value, $hashedValue, array $options = array())
 	{
-		if($hashedValue[0] === '_' || $hashedValue[0] === '$')
-		{
+		if ($hashedValue[0] === '_' || $hashedValue[0] === '$') {
 			return parent::check($value, $hashedValue, $options);
-		}
-		elseif($value && $hashedValue !== '*' && ($value === $hashedValue || md5($value) === $hashedValue))
-		{
+		} elseif ($value && $hashedValue !== '*' && ($value === $hashedValue || md5($value) === $hashedValue)) {
 			return true;
 		}
 		return false;

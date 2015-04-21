@@ -7,30 +7,40 @@ use Illuminate\Hashing\BcryptHasher;
 
 class HashBcrypt implements HasherContract
 {
-    /** @var BcryptHasher $hasher */
-    private $hasher;
+	/**
+	 * @var BcryptHasher
+	 */
+	private $hasher;
 
+	/**
+	 * @param BcryptHasher $hasher
+	 */
+	public function __construct(BcryptHasher $hasher)
+	{
+		$this->hasher = $hasher;
+	}
 
-    public function __construct(BcryptHasher $hasher)
-    {
-        $this->hasher = $hasher;
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function make($value, array $options = array())
+	{
+		return $this->hasher->make($value, $options);
+	}
 
-    /**
-     * This is only a wrapper to use Laravel's Bcrypt hasher. Used like this to avoid special checks in the factory
-     */
-    public function make($value, array $options = array())
-    {
-        return $this->hasher->make($value, $options);
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function check($value, $hashedValue, array $options = array())
+	{
+		return $this->hasher->check($value, $hashedValue, $options);
+	}
 
-    public function check($value, $hashedValue, array $options = array())
-    {
-        return $this->hasher->check($value, $hashedValue, $options);
-    }
-
-    public function needsRehash($hashedValue, array $options = array())
-    {
-        return $this->hasher->needsRehash($hashedValue, $options);
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function needsRehash($hashedValue, array $options = array())
+	{
+		return $this->hasher->needsRehash($hashedValue, $options);
+	}
 }

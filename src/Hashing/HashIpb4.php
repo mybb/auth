@@ -16,23 +16,32 @@ use RuntimeException;
  */
 class HashIpb4 implements HasherContract
 {
-    public function make($value, array $options = array())
-    {
-        // We need a salt to use ipb's hashing algorithm - as we don't generate one here we're throwing an error
-        if (empty($options['salt'])) {
-            throw new RuntimeException("No salt specified");
-        }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function make($value, array $options = array())
+	{
+		// We need a salt to use ipb's hashing algorithm - as we don't generate one here we're throwing an error
+		if (empty($options['salt'])) {
+			throw new RuntimeException("No salt specified");
+		}
 
-        return crypt($value, '$2a$13$'.$options['salt']);
-    }
+		return crypt($value, '$2a$13$'.$options['salt']);
+	}
 
-    public function check($value, $hashedValue, array $options = array())
-    {
-        return ($hashedValue == $this->make($value, $options));
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function check($value, $hashedValue, array $options = array())
+	{
+		return ($hashedValue == $this->make($value, $options));
+	}
 
-    public function needsRehash($hashedValue, array $options = array())
-    {
-        return false;
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function needsRehash($hashedValue, array $options = array())
+	{
+		return false;
+	}
 }

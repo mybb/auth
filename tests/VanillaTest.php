@@ -1,10 +1,23 @@
 <?php
 
-class VanillaTest extends PHPUnit_Framework_TestCase  {
+class VanillaTest extends PHPUnit_Framework_TestCase
+{
+	/**
+	 * @var string
+	 */
 	private $hash = '$P$BaAvfJWlUGFb.7Gnmt1u4n4L5qkjn71';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = '$P$B5mMvHVW.jdJ9gU873O4hjcnDu5m5N1';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashVanilla
+	 */
 	private $hasher;
 
 	public function __construct()

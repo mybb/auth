@@ -20,8 +20,8 @@ class AuthServiceProvider extends LaravelAuth
 		parent::register();
 
 		// Bind our Password Hashing method as singleton
-		$this->app->singleton('MyBB\Auth\Hashing\phpass\PasswordHash', function($app)
-		{
+		$this->app->singleton('MyBB\Auth\Hashing\phpass\PasswordHash', function ($app) {
+		
 			// Make sure the class gets properly initialized
 			$phpass = new PasswordHash(8, true);
 			$phpass->PasswordHash(8, true);

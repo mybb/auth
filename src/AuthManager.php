@@ -21,7 +21,8 @@ class AuthManager extends LaravelManager
 	/**
 	 * Create a new driver instance.
 	 *
-	 * @param  string  $driver
+	 * @param  string $driver
+	 *
 	 * @return mixed
 	 */
 	protected function createDriver($driver)
@@ -41,14 +42,17 @@ class AuthManager extends LaravelManager
 	/**
 	 * Call a custom driver creator.
 	 *
-	 * @param  string  $driver
+	 * @param  string $driver
+	 *
 	 * @return Guard
 	 */
 	protected function callCustomCreator($driver)
 	{
 		$custom = parent::callCustomCreator($driver);
 
-		if ($custom instanceof \Illuminate\Contracts\Auth\Guard) return $custom;
+		if ($custom instanceof \Illuminate\Contracts\Auth\Guard) {
+			return $custom;
+		}
 
 		return new Guard($custom, $this->app['session.store']);
 	}
@@ -119,7 +123,8 @@ class AuthManager extends LaravelManager
 	/**
 	 * Set the default authentication driver name.
 	 *
-	 * @param  string  $name
+	 * @param  string $name
+	 *
 	 * @return void
 	 */
 	public function setDefaultDriver($name)

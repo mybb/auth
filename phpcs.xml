@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ruleset name="MyBB 2.0 Auth">
+	<description>Configuration for MyBB 2.0 Auth package</description>
+
+	<file>src</file>
+	<file>tests</file>
+
+	<exclude-pattern>*/phpass/PasswordHash.php</exclude-pattern>
+
+	<rule ref="../../../MyBB2"/>
+
+	<rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+		<exclude-pattern>*/tests/*</exclude-pattern>
+	</rule>
+
+	<rule ref="MyBB2.Naming.InterfaceConvention">
+		<exclude-pattern>*/src/Contracts/*</exclude-pattern>
+	</rule>
+
+	<rule ref="MyBB2.Naming.TraitConvention">
+		<exclude-pattern>*/Authenticatable.php</exclude-pattern>
+	</rule>
+</ruleset>

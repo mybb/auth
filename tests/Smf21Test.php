@@ -1,12 +1,31 @@
 <?php
 
-class Smf21Test extends PHPUnit_Framework_TestCase  {
+class Smf21Test extends PHPUnit_Framework_TestCase
+{
+	/**
+	 * @var string
+	 */
 	private $hash = '$2y$13$HxdgIIWdxd6HSl8.5BCS8urINNi/HHN9sbwQ57TEJj5R0j25iK1W6';
+	/**
+	 * @var string
+	 */
 	private $name = 'User';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = '$2y$13$/MdC5inL/yBg3DGprSLiQuZo3PPxWy5OuKE4EH2ffMcVbu4DZnuxK';
+	/**
+	 * @var string
+	 */
 	private $utf8_name = 'Test';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashSmf
+	 */
 	private $hasher;
 
 	public function __construct()
@@ -25,7 +44,9 @@ class Smf21Test extends PHPUnit_Framework_TestCase  {
 
 	public function testUtf8Hash()
 	{
-		$this->assertTrue($this->hasher->check('pässwörd', $this->utf8_hash, ['name' => $this->utf8_name, 'hasher' => '2.1']));
+		$this->assertTrue(
+			$this->hasher->check('pässwörd', $this->utf8_hash, ['name' => $this->utf8_name, 'hasher' => '2.1'])
+		);
 	}
 
 	public function testGenerateAndValidate()
