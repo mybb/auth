@@ -79,4 +79,3 @@ class HashFactory implements HasherContract
 		return $hasher;
 	}
 }
-

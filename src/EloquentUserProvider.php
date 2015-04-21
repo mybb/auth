@@ -7,7 +7,6 @@ use Illuminate\Contracts\Auth\Authenticatable as LaravelUserContract;
 use MyBB\Auth\Contracts\UserContract;
 use MyBB\Auth\Exceptions\AuthNotMybbInstanceException;
 
-
 class EloquentUserProvider extends LaravelUser
 {
 	/**

@@ -3,7 +3,7 @@
 namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-use MyBB\Auth\Exceptions\HasherNoSaltException
+use MyBB\Auth\Exceptions\HasherNoSaltException;
 
 /**
  * Hasher for legacy WCF 1 passwords, using the following algorithm:
@@ -14,6 +14,7 @@ use MyBB\Auth\Exceptions\HasherNoSaltException
 class HashWcf1 implements HasherContract
 {
 	const SALT_POS_BEFORE = 'before';
+
 	const SALT_POS_AFTER = 'after';
 
 	const ENABLE_SALT = 'encryption_enable_salting';

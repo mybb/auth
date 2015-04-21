@@ -45,4 +45,3 @@ class HashMybb1 implements HasherContract
 		return false;
 	}
 }
->>>>>>> origin/master
