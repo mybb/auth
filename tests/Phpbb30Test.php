@@ -1,10 +1,23 @@
 <?php
 
-class Phpbb30Test extends PHPUnit_Framework_TestCase  {
+class Phpbb30Test extends PHPUnit_Framework_TestCase
+{
+	/**
+	 * @var string
+	 */
 	private $hash = '$H$9H.SIOoJJeV84/fEla5e6iD969pzUP1';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = '$H$91/RaaGT7AdVorKIgiqYSlwY0tQJ88/';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashPhpbb3
+	 */
 	private $hasher;
 
 	public function __construct()

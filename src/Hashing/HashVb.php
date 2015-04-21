@@ -4,7 +4,6 @@ namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 use MyBB\Auth\Exceptions\HasherNoSaltException;
-use RuntimeException;
 
 /**
  * Hasher for legacy vB passwords, using the following algorithm:
@@ -17,42 +16,50 @@ use RuntimeException;
  */
 class HashVb implements HasherContract
 {
-    public function make($value, array $options = array())
-    {
-        // We need a salt to use vb's hashing algorithm - as we don't generate one here we're throwing an error
-        if (empty($options['salt'])) {
-            throw new HasherNoSaltException;
-        }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function make($value, array $options = array())
+	{
+		// We need a salt to use vb's hashing algorithm - as we don't generate one here we're throwing an error
+		if (empty($options['salt'])) {
+			throw new HasherNoSaltException;
+		}
 
-        return md5(md5($value) . $options['salt']);
-    }
+		return md5(md5($value) . $options['salt']);
+	}
 
-    public function check($value, $hashedValue, array $options = array())
-    {
-        // We need a salt to use vb's hashing algorithm - as we don't generate one here we're throwing an error
-        if (empty($options['salt'])) {
-            throw new HasherNoSaltException;
-        }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function check($value, $hashedValue, array $options = array())
+	{
+		// We need a salt to use vb's hashing algorithm - as we don't generate one here we're throwing an error
+		if (empty($options['salt'])) {
+			throw new HasherNoSaltException;
+		}
 
-        if ($hashedValue == $this->make($value, $options))
-        {
-            return true;
-        }
-        // The password wasn't hashed in all versions
-        else if ($hashedValue == md5($value . $options['salt']))
-        {
-            return true;
-        }
+		if ($hashedValue == $this->make($value, $options)) {
+			return true;
+		} // The password wasn't hashed in all versions
+		elseif ($hashedValue == md5($value . $options['salt'])) {
+			return true;
+		}
 
-        // While we encode everything in utf8, vb doesn't do so by default so if we have a different utf8 representation of the password we try that too
-        if (utf8_decode($value) !== $value)
-            return $this->check(utf8_decode($value), $hashedValue, $options);
+		// While we encode everything in utf8, vb doesn't do so by default
+		// so if we have a different utf8 representation of the password we try that too
+		if (utf8_decode($value) !== $value) {
+			return $this->check(utf8_decode($value), $hashedValue, $options);
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    public function needsRehash($hashedValue, array $options = array())
-    {
-        return false;
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function needsRehash($hashedValue, array $options = array())
+	{
+		return false;
+	}
 }

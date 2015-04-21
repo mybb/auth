@@ -1,10 +1,23 @@
 <?php
 
-class BbpressTest extends PHPUnit_Framework_TestCase  {
+class BbpressTest extends PHPUnit_Framework_TestCase
+{
+	/**
+	 * @var string
+	 */
 	private $hash = '$P$BFY.vYwADSzYYTn.eiSaW/E6hxcmGX1';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = '$P$Bks.1dvVd1JIVmaIpQxJHf2.BTvzrM.';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashBbpress
+	 */
 	private $hasher;
 
 	public function __construct()

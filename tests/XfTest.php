@@ -1,10 +1,23 @@
 <?php
 
-class XfTest extends PHPUnit_Framework_TestCase  {
+class XfTest extends PHPUnit_Framework_TestCase
+{
+	/**
+	 * @var string
+	 */
 	private $hash = '$2a$10$DfcgH9Z99.JMXN4kk33nQeKk2bI4/8jdN4HsDQt/J4Qc8T8MHtjV2';
+	/**
+	 * @var string
+	 */
 	private $utf8_hash = '$2a$10$1L8KDRVa49bG7fwxPDxr1eLqGVRNW1OXrPthKgLbejfMf14xHXEna';
+	/**
+	 * @var string
+	 */
 	private $password = 'thisismypassword';
 
+	/**
+	 * @var \MyBB\Auth\Hashing\HashXf12
+	 */
 	private $hasher;
 
 	public function __construct()

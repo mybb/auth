@@ -15,6 +15,9 @@ use MyBB\Auth\Contracts\Guard as GuardContract;
 
 class Guard extends IlluminateGuard implements GuardContract
 {
+	/**
+	 * @var UserContract
+	 */
 	protected $defaultUser;
 
 	/**
