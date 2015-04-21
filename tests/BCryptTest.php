@@ -23,7 +23,7 @@ class BCryptTest extends PHPUnit_Framework_TestCase
 	public function __construct()
 	{
 		require_once __DIR__.'/../vendor/illuminate/contracts/Hashing/Hasher.php';
-		require_once __DIR__.'/../vendor/illuminate/Hashing/BcryptHasher.php';
+		require_once __DIR__.'/../vendor/illuminate/hashing/BcryptHasher.php';
 		require_once __DIR__.'/../src/Hashing/HashBcrypt.php';
 
 		$bcrypt = new \Illuminate\Hashing\BcryptHasher();
