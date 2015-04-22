@@ -7,7 +7,7 @@
 
 	<exclude-pattern>*/phpass/PasswordHash.php</exclude-pattern>
 
-	<rule ref="../../../MyBB2"/>
+	<rule ref="MyBB2"/>
 
 	<rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
 		<exclude-pattern>*/tests/*</exclude-pattern>
