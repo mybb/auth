@@ -1,4 +1,12 @@
 <?php
+/**
+ * Test WoltLab Community Framework v1 Hasher
+ *
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/auth
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 // TODO: WCF 1 has a lot of settings, add new test (cases) for them and generate original passwords
 class Wcf1Test extends PHPUnit_Framework_TestCase

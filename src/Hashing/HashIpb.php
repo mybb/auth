@@ -1,14 +1,17 @@
 <?php
+/**
+ * Hasher for legacy IPB 2/3 passwords, using the same algoritm as MyBB 1.x used
+ *
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/auth
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 
-/**
- * Hasher for legacy IPB 2/3 passwords, using the same algoritm as MyBB 1.x used
- *
- * @package MyBB\Auth
- */
 class HashIpb extends HashMybb1
 {
 	/**

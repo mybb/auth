@@ -1,15 +1,18 @@
 <?php
+/**
+ * Hasher for PHPass Passwords
+ *
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/auth
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 use MyBB\Auth\Hashing\phpass\PasswordHash;
 
-/**
- * Hasher for PHPass Passwords
- *
- * @package MyBB\Auth
- */
 class HashPhpass implements HasherContract
 {
 	/**

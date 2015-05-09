@@ -2,9 +2,10 @@
 /**
  * Auth manager extension for MyBB 2.0. Uses the custom Guard instance to add registering of a default user.
  *
- * @version 2.0.0
  * @author  MyBB Group
- * @license LGPL v3
+ * @version 2.0.0
+ * @package mybb/auth
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
 namespace MyBB\Auth;

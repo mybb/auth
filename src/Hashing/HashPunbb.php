@@ -1,10 +1,4 @@
 <?php
-
-namespace MyBB\Auth\Hashing;
-
-use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-use MyBB\Auth\Exceptions\HasherNoSaltException;
-
 /**
  * Hasher for legacy PunBB passwords, using the following algorithm:
  *
@@ -14,8 +8,17 @@ use MyBB\Auth\Exceptions\HasherNoSaltException;
  *
  * Checks also fallbacks used in older versions
  *
- * @package MyBB\Auth
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/auth
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
  */
+
+namespace MyBB\Auth\Hashing;
+
+use Illuminate\Contracts\Hashing\Hasher as HasherContract;
+use MyBB\Auth\Exceptions\HasherNoSaltException;
+
 class HashPunbb implements HasherContract
 {
 	/**

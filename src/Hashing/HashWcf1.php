@@ -1,16 +1,19 @@
 <?php
+/**
+ * Hasher for legacy WCF 1 passwords, using the following algorithm:
+ * Note that WCF 1 has some options for their passwords
+ *
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/auth
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 namespace MyBB\Auth\Hashing;
 
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 use MyBB\Auth\Exceptions\HasherNoSaltException;
 
-/**
- * Hasher for legacy WCF 1 passwords, using the following algorithm:
- * Note that WCF 1 has some options for their passwords
- *
- * @package MyBB\Auth
- */
 class HashWcf1 implements HasherContract
 {
 	const SALT_POS_BEFORE = 'before';
