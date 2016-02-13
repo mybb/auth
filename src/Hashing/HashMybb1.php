@@ -22,11 +22,11 @@ class HashMybb1 implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function make($value, array $options = array())
+	public function make($value, array $options = [])
 	{
 		// We need a salt to use mybb 1.x hashing algorithm - as we don't generate one here we're throwing an error
 		if (empty($options['salt'])) {
-			throw new HasherNoSaltException;
+			throw new HasherNoSaltException();
 		}
 
 		return md5(md5($options['salt']) . md5($value));
@@ -35,7 +35,7 @@ class HashMybb1 implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function check($value, $hashedValue, array $options = array())
+	public function check($value, $hashedValue, array $options = [])
 	{
 		return ($hashedValue == $this->make($value, $options));
 	}
@@ -43,7 +43,7 @@ class HashMybb1 implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function needsRehash($hashedValue, array $options = array())
+	public function needsRehash($hashedValue, array $options = [])
 	{
 		return false;
 	}

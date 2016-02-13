@@ -22,7 +22,7 @@ class HashVb implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function make($value, array $options = array())
+	public function make($value, array $options = [])
 	{
 		// We need a salt to use vb's hashing algorithm - as we don't generate one here we're throwing an error
 		if (empty($options['salt'])) {
@@ -35,7 +35,7 @@ class HashVb implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function check($value, $hashedValue, array $options = array())
+	public function check($value, $hashedValue, array $options = [])
 	{
 		// We need a salt to use vb's hashing algorithm - as we don't generate one here we're throwing an error
 		if (empty($options['salt'])) {
@@ -61,7 +61,7 @@ class HashVb implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function needsRehash($hashedValue, array $options = array())
+	public function needsRehash($hashedValue, array $options = [])
 	{
 		return false;
 	}

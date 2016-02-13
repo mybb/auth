@@ -19,7 +19,7 @@ class HashSmf implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function make($value, array $options = array())
+	public function make($value, array $options = [])
 	{
 		if (empty($options['name'])) {
 			throw new HasherNoUsernameException;
@@ -32,10 +32,10 @@ class HashSmf implements HasherContract
 		if ($options['hasher'] == '2.0') {
 			return $this->md5Hmac($options['name'], $value);
 		} elseif ($options['hasher'] == 'sha1') {
-			return sha1(strtolower($options['name']).$value);
+			return sha1(strtolower($options['name']) . $value);
 		} else {
 			// Prefix the password with the username as SMF 2.1 does
-			$value = strtolower($options['name']).$value;
+			$value = strtolower($options['name']) . $value;
 
 			// Nothing so see here, SMF's way of creating a salt
 
@@ -101,9 +101,27 @@ class HashSmf implements HasherContract
 	}
 
 	/**
+	 * @param string $username
+	 * @param string $password
+	 *
+	 * @return string
+	 */
+	private function md5Hmac($username, $password)
+	{
+		if (strlen($username) > 64) {
+			$username = pack('H*', md5($username));
+		}
+		$username = str_pad($username, 64, chr(0x00));
+		$k_ipad = $username ^ str_repeat(chr(0x36), 64);
+		$k_opad = $username ^ str_repeat(chr(0x5c), 64);
+
+		return md5($k_opad . pack('H*', md5($k_ipad . $password)));
+	}
+
+	/**
 	 * {@inheritdoc}
 	 */
-	public function check($value, $hashedValue, array $options = array())
+	public function check($value, $hashedValue, array $options = [])
 	{
 		if (empty($options['name'])) {
 			throw new HasherNoUsernameException;
@@ -114,11 +132,11 @@ class HashSmf implements HasherContract
 			$is_sha1 = true;
 		}
 
-		if ($is_sha1 && sha1(strtolower($options['name']).$value) == $hashedValue) {
+		if ($is_sha1 && sha1(strtolower($options['name']) . $value) == $hashedValue) {
 			return true;
 		} else {
 			// Prefix the password with the username as SMF 2.1 does
-			if (crypt(strtolower($options['name']).$value, $hashedValue) == $hashedValue) {
+			if (crypt(strtolower($options['name']) . $value, $hashedValue) == $hashedValue) {
 				return true;
 			} elseif (strlen($hashedValue) == 32 && $this->md5Hmac($options['name'], $value) == $hashedValue) {
 				return true;
@@ -139,25 +157,8 @@ class HashSmf implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function needsRehash($hashedValue, array $options = array())
+	public function needsRehash($hashedValue, array $options = [])
 	{
 		return false;
-	}
-
-	/**
-	 * @param string $username
-	 * @param string $password
-	 *
-	 * @return string
-	 */
-	private function md5Hmac($username, $password)
-	{
-		if (strlen($username) > 64) {
-			$username = pack('H*', md5($username));
-		}
-		$username = str_pad($username, 64, chr(0x00));
-		$k_ipad = $username ^ str_repeat(chr(0x36), 64);
-		$k_opad = $username ^ str_repeat(chr(0x5c), 64);
-		return md5($k_opad.pack('H*', md5($k_ipad.$password)));
 	}
 }

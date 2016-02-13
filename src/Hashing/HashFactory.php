@@ -33,7 +33,7 @@ class HashFactory implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function make($value, array $options = array())
+	public function make($value, array $options = [])
 	{
 		$hasher = $this->getHasher($options['type']);
 
@@ -43,7 +43,7 @@ class HashFactory implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function check($value, $hashedValue, array $options = array())
+	public function check($value, $hashedValue, array $options = [])
 	{
 		$hasher = $this->getHasher($options['type']);
 
@@ -53,7 +53,7 @@ class HashFactory implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function needsRehash($hashedValue, array $options = array())
+	public function needsRehash($hashedValue, array $options = [])
 	{
 		$hasher = $this->getHasher($options['type']);
 

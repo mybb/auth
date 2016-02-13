@@ -10,14 +10,12 @@
 
 namespace MyBB\Auth\Hashing;
 
-use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-
 class HashBbpress extends HashPhpass
 {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function check($value, $hashedValue, array $options = array())
+	public function check($value, $hashedValue, array $options = [])
 	{
 		// WordPress (and so bbPress) used simple md5 hashing some time ago
 		if (strlen($hashedValue) <= 32) {

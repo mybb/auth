@@ -1,6 +1,6 @@
 <?php
 /**
- * Service Provider for new user implementation
+ * MyBB authentication library service provider.
  *
  * @author  MyBB Group
  * @version 2.0.0
@@ -10,53 +10,32 @@
 
 namespace MyBB\Auth;
 
-use Illuminate\Auth\AuthServiceProvider as LaravelAuth;
-use MyBB\Auth\Hashing\phpass\PasswordHash;
+use MyBB\Auth\Hashing\HashFactory;
 
-/**
- * This class is only used to register our own subclass of the AuthManager instead of Laravel's default one
- */
-class AuthServiceProvider extends LaravelAuth
+class AuthServiceProvider extends \Illuminate\Support\ServiceProvider
 {
 	/**
-	 * Register the service provider.
+	 * Perform post-registration booting of services.
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		/** @var \Illuminate\Auth\AuthManager $auth */
+		$auth = $this->app['auth'];
+
+		$auth->provider('mybb', function($config) {
+			return new MybbUserProvider(new HashFactory($this->app), $this->app['hash'], $config['model']);
+		});
+	}
+
+	/**
+	 * Register bindings in the container.
 	 *
 	 * @return void
 	 */
 	public function register()
 	{
-		parent::register();
-
-		// Bind our Password Hashing method as singleton
-		$this->app->singleton('MyBB\Auth\Hashing\phpass\PasswordHash', function ($app) {
-		
-			// Make sure the class gets properly initialized
-			$phpass = new PasswordHash(8, true);
-			$phpass->PasswordHash(8, true);
-			return $phpass;
-		});
-	}
-
-	/**
-	 * Register the authenticator services.
-	 *
-	 * @return void
-	 */
-	protected function registerAuthenticator()
-	{
-		$this->app->singleton('auth', function ($app) {
-			// Once the authentication service has actually been requested by the developer
-			// we will set a variable in the application indicating such. This helps us
-			// know that we need to set any queued cookies in the after event later.
-			$app['auth.loaded'] = true;
-
-			return new AuthManager($app);
-		});
-
-		$this->app->singleton('auth.driver', function ($app) {
-			return $app['auth']->driver();
-		});
-		
-		$this->app->alias('auth.driver', 'MyBB\Auth\Contracts\Guard');
+		//
 	}
 }

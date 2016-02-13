@@ -31,7 +31,7 @@ class HashPhpbb3 implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function make($value, array $options = array())
+	public function make($value, array $options = [])
 	{
 		if (isset($options['hasher']) && $options['hasher'] == '3.0') {
 			return $this->phpass->HashPassword($value);
@@ -46,7 +46,7 @@ class HashPhpbb3 implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function check($value, $hashedValue, array $options = array())
+	public function check($value, $hashedValue, array $options = [])
 	{
 		// The bcrypt hash is at least 60 chars and is used in phpBB 3.1
 		if (strlen($hashedValue) >= 60 && $hashedValue == crypt($value, $hashedValue)) {
@@ -63,7 +63,7 @@ class HashPhpbb3 implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function needsRehash($hashedValue, array $options = array())
+	public function needsRehash($hashedValue, array $options = [])
 	{
 		return false;
 	}

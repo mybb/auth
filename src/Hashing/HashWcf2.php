@@ -22,7 +22,7 @@ class HashWcf2 implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function make($value, array $options = array())
+	public function make($value, array $options = [])
 	{
 		// We need a salt to use wcf2's hashing algorithm - as we don't generate one here we're throwing an error
 		if (empty($options['salt'])) {
@@ -35,16 +35,17 @@ class HashWcf2 implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function check($value, $hashedValue, array $options = array())
+	public function check($value, $hashedValue, array $options = [])
 	{
 		$salt = substr($hashedValue, 0, 29);
+
 		return (crypt(crypt($value, $salt), $salt) == $hashedValue);
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function needsRehash($hashedValue, array $options = array())
+	public function needsRehash($hashedValue, array $options = [])
 	{
 		return false;
 	}

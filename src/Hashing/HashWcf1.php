@@ -28,7 +28,7 @@ class HashWcf1 implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function make($value, array $options = array())
+	public function make($value, array $options = [])
 	{
 		// We need a salt to use wcf1's hashing algorithm - as we don't generate one here we're throwing an error
 		if (empty($options['salt'])) {
@@ -37,9 +37,9 @@ class HashWcf1 implements HasherContract
 
 		$options = array_merge(
 			[
-				static::HASHING_METHOD => 'sha1',
-				static::ENABLE_SALT => true,
-				static::SALT_POS => static::SALT_POS_BEFORE,
+				static::HASHING_METHOD         => 'sha1',
+				static::ENABLE_SALT            => true,
+				static::SALT_POS               => static::SALT_POS_BEFORE,
 				static::ENCRYPT_BEFORE_SALTING => true,
 			],
 			$options
@@ -54,7 +54,7 @@ class HashWcf1 implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function check($value, $hashedValue, array $options = array())
+	public function check($value, $hashedValue, array $options = [])
 	{
 		return ($hashedValue == $this->make($value, $options));
 	}
@@ -62,7 +62,7 @@ class HashWcf1 implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function needsRehash($hashedValue, array $options = array())
+	public function needsRehash($hashedValue, array $options = [])
 	{
 		return false;
 	}
@@ -112,6 +112,7 @@ class HashWcf1 implements HasherContract
 			if ($settings[static::SALT_POS] == static::SALT_POS_AFTER) {
 				$hash .= $salt;
 			}
+
 			return $this->encrypt($hash, $settings[static::HASHING_METHOD]);
 		} else {
 			return $this->encrypt($value, $settings[static::HASHING_METHOD]);

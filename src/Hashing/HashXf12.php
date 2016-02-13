@@ -10,8 +10,6 @@
 
 namespace MyBB\Auth\Hashing;
 
-use Illuminate\Contracts\Hashing\Hasher as HasherContract;
-
 class HashXf12 extends HashPhpass
 {
 

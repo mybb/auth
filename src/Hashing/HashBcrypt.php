@@ -31,7 +31,7 @@ class HashBcrypt implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function make($value, array $options = array())
+	public function make($value, array $options = [])
 	{
 		return $this->hasher->make($value, $options);
 	}
@@ -39,7 +39,7 @@ class HashBcrypt implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function check($value, $hashedValue, array $options = array())
+	public function check($value, $hashedValue, array $options = [])
 	{
 		return $this->hasher->check($value, $hashedValue, $options);
 	}
@@ -47,7 +47,7 @@ class HashBcrypt implements HasherContract
 	/**
 	 * {@inheritdoc}
 	 */
-	public function needsRehash($hashedValue, array $options = array())
+	public function needsRehash($hashedValue, array $options = [])
 	{
 		return $this->hasher->needsRehash($hashedValue, $options);
 	}
