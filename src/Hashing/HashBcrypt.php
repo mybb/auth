@@ -15,40 +15,40 @@ use Illuminate\Hashing\BcryptHasher;
 
 class HashBcrypt implements HasherContract
 {
-	/**
-	 * @var BcryptHasher
-	 */
-	private $hasher;
+    /**
+     * @var BcryptHasher
+     */
+    private $hasher;
 
-	/**
-	 * @param BcryptHasher $hasher
-	 */
-	public function __construct(BcryptHasher $hasher)
-	{
-		$this->hasher = $hasher;
-	}
+    /**
+     * @param BcryptHasher $hasher
+     */
+    public function __construct(BcryptHasher $hasher)
+    {
+        $this->hasher = $hasher;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function make($value, array $options = [])
-	{
-		return $this->hasher->make($value, $options);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function make($value, array $options = [])
+    {
+        return $this->hasher->make($value, $options);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function check($value, $hashedValue, array $options = [])
-	{
-		return $this->hasher->check($value, $hashedValue, $options);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function check($value, $hashedValue, array $options = [])
+    {
+        return $this->hasher->check($value, $hashedValue, $options);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function needsRehash($hashedValue, array $options = [])
-	{
-		return $this->hasher->needsRehash($hashedValue, $options);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function needsRehash($hashedValue, array $options = [])
+    {
+        return $this->hasher->needsRehash($hashedValue, $options);
+    }
 }

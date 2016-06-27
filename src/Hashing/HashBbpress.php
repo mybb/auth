@@ -12,17 +12,17 @@ namespace MyBB\Auth\Hashing;
 
 class HashBbpress extends HashPhpass
 {
-	/**
-	 * {@inheritdoc}
-	 */
-	public function check($value, $hashedValue, array $options = [])
-	{
-		// WordPress (and so bbPress) used simple md5 hashing some time ago
-		if (strlen($hashedValue) <= 32) {
-			return ($hashedValue == md5($value));
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function check($value, $hashedValue, array $options = [])
+    {
+        // WordPress (and so bbPress) used simple md5 hashing some time ago
+        if (strlen($hashedValue) <= 32) {
+            return ($hashedValue == md5($value));
+        }
 
-		// PHPass passwords
-		return parent::check($value, $hashedValue, $options);
-	}
+        // PHPass passwords
+        return parent::check($value, $hashedValue, $options);
+    }
 }

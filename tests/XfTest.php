@@ -10,52 +10,52 @@
 
 class XfTest extends PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var string
-	 */
-	private $hash = '$2a$10$DfcgH9Z99.JMXN4kk33nQeKk2bI4/8jdN4HsDQt/J4Qc8T8MHtjV2';
-	/**
-	 * @var string
-	 */
-	private $utf8_hash = '$2a$10$1L8KDRVa49bG7fwxPDxr1eLqGVRNW1OXrPthKgLbejfMf14xHXEna';
-	/**
-	 * @var string
-	 */
-	private $password = 'thisismypassword';
+    /**
+     * @var string
+     */
+    private $hash = '$2a$10$DfcgH9Z99.JMXN4kk33nQeKk2bI4/8jdN4HsDQt/J4Qc8T8MHtjV2';
+    /**
+     * @var string
+     */
+    private $utf8_hash = '$2a$10$1L8KDRVa49bG7fwxPDxr1eLqGVRNW1OXrPthKgLbejfMf14xHXEna';
+    /**
+     * @var string
+     */
+    private $password = 'thisismypassword';
 
-	/**
-	 * @var \MyBB\Auth\Hashing\HashXf12
-	 */
-	private $hasher;
+    /**
+     * @var \MyBB\Auth\Hashing\HashXf12
+     */
+    private $hasher;
 
-	public function __construct()
-	{
-		require_once __DIR__.'/../vendor/illuminate/contracts/Hashing/Hasher.php';
-		require_once __DIR__.'/../src/Hashing/phpass/PasswordHash.php';
-		require_once __DIR__.'/../src/Hashing/HashPhpass.php';
-		require_once __DIR__.'/../src/Hashing/HashXf12.php';
+    public function __construct()
+    {
+        require_once __DIR__.'/../vendor/illuminate/contracts/Hashing/Hasher.php';
+        require_once __DIR__.'/../src/Hashing/phpass/PasswordHash.php';
+        require_once __DIR__.'/../src/Hashing/HashPhpass.php';
+        require_once __DIR__.'/../src/Hashing/HashXf12.php';
 
-		$phpass = new \MyBB\Auth\Hashing\phpass\PasswordHash(8, true);
-		$phpass->PasswordHash(8, true);
+        $phpass = new \MyBB\Auth\Hashing\phpass\PasswordHash(8, true);
+        $phpass->PasswordHash(8, true);
 
-		$this->hasher = new \MyBB\Auth\Hashing\HashXf12($phpass);
-	}
+        $this->hasher = new \MyBB\Auth\Hashing\HashXf12($phpass);
+    }
 
 
-	public function testHash()
-	{
-		$this->assertTrue($this->hasher->check('password', $this->hash));
-	}
+    public function testHash()
+    {
+        $this->assertTrue($this->hasher->check('password', $this->hash));
+    }
 
-	public function testUtf8Hash()
-	{
-		$this->assertTrue($this->hasher->check('pässwörd', $this->utf8_hash));
-	}
+    public function testUtf8Hash()
+    {
+        $this->assertTrue($this->hasher->check('pässwörd', $this->utf8_hash));
+    }
 
-	public function testGenerateAndValidate()
-	{
-		$hash = $this->hasher->make($this->password);
+    public function testGenerateAndValidate()
+    {
+        $hash = $this->hasher->make($this->password);
 
-		$this->assertTrue($this->hasher->check($this->password, $hash));
-	}
+        $this->assertTrue($this->hasher->check($this->password, $hash));
+    }
 }

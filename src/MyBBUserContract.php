@@ -12,7 +12,6 @@ namespace MyBB\Auth;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 
-
 interface MyBBUserContract extends Authenticatable
 {
     /**

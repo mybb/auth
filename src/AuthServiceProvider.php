@@ -14,28 +14,28 @@ use MyBB\Auth\Hashing\HashFactory;
 
 class AuthServiceProvider extends \Illuminate\Support\ServiceProvider
 {
-	/**
-	 * Perform post-registration booting of services.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-		/** @var \Illuminate\Auth\AuthManager $auth */
-		$auth = $this->app['auth'];
+    /**
+     * Perform post-registration booting of services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        /** @var \Illuminate\Auth\AuthManager $auth */
+        $auth = $this->app['auth'];
 
-		$auth->provider('mybb', function($config) {
-			return new MybbUserProvider(new HashFactory($this->app), $this->app['hash'], $config['model']);
-		});
-	}
+        $auth->provider('mybb', function ($config) {
+            return new MybbUserProvider(new HashFactory($this->app), $this->app['hash'], $config['model']);
+        });
+    }
 
-	/**
-	 * Register bindings in the container.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-		//
-	}
+    /**
+     * Register bindings in the container.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
 }
