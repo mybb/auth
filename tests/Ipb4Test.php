@@ -8,7 +8,7 @@
  * @license http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
-class Ipb4Test extends PHPUnit_Framework_TestCase
+class Ipb4Test extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var string
@@ -36,14 +36,10 @@ class Ipb4Test extends PHPUnit_Framework_TestCase
      */
     private $hasher;
 
-    public function __construct()
+    public function setUp()
     {
-        require_once __DIR__.'/../vendor/illuminate/contracts/Hashing/Hasher.php';
-        require_once __DIR__.'/../src/Hashing/HashIpb4.php';
-
         $this->hasher = new \MyBB\Auth\Hashing\HashIpb4();
     }
-
 
     public function testHash()
     {

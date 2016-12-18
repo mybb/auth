@@ -9,7 +9,7 @@
  */
 
 // TODO: WCF 1 has a lot of settings, add new test (cases) for them and generate original passwords
-class Wcf1Test extends PHPUnit_Framework_TestCase
+class Wcf1Test extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var string
@@ -37,14 +37,10 @@ class Wcf1Test extends PHPUnit_Framework_TestCase
      */
     private $hasher;
 
-    public function __construct()
+    public function setUp()
     {
-        require_once __DIR__.'/../vendor/illuminate/contracts/Hashing/Hasher.php';
-        require_once __DIR__.'/../src/Hashing/HashWcf1.php';
-
         $this->hasher = new \MyBB\Auth\Hashing\HashWcf1();
     }
-
 
     public function testHash()
     {

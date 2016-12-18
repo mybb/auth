@@ -8,7 +8,7 @@
  * @license http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
-class BbpressTest extends PHPUnit_Framework_TestCase
+class BbpressTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var string
@@ -28,19 +28,15 @@ class BbpressTest extends PHPUnit_Framework_TestCase
      */
     private $hasher;
 
-    public function __construct()
+    public function setUp()
     {
-        require_once __DIR__.'/../vendor/illuminate/contracts/Hashing/Hasher.php';
-        require_once __DIR__.'/../src/Hashing/phpass/PasswordHash.php';
-        require_once __DIR__.'/../src/Hashing/HashPhpass.php';
-        require_once __DIR__.'/../src/Hashing/HashBbpress.php';
+        parent::setUp();
 
         $phpass = new \MyBB\Auth\Hashing\phpass\PasswordHash(8, true);
         $phpass->PasswordHash(8, true);
 
         $this->hasher = new \MyBB\Auth\Hashing\HashBbpress($phpass);
     }
-
 
     public function testHash()
     {

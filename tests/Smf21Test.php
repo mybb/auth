@@ -8,7 +8,7 @@
  * @license http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
-class Smf21Test extends PHPUnit_Framework_TestCase
+class Smf21Test extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var string
@@ -36,14 +36,10 @@ class Smf21Test extends PHPUnit_Framework_TestCase
      */
     private $hasher;
 
-    public function __construct()
+    public function setUp()
     {
-        require_once __DIR__.'/../vendor/illuminate/contracts/Hashing/Hasher.php';
-        require_once __DIR__.'/../src/Hashing/HashSmf.php';
-
         $this->hasher = new \MyBB\Auth\Hashing\HashSmf();
     }
-
 
     public function testHash()
     {

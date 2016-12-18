@@ -8,7 +8,7 @@
  * @license http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
-class BCryptTest extends PHPUnit_Framework_TestCase
+class BCryptTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var string
@@ -28,16 +28,13 @@ class BCryptTest extends PHPUnit_Framework_TestCase
      */
     private $hasher;
 
-    public function __construct()
+    public function setUp()
     {
-        require_once __DIR__.'/../vendor/illuminate/contracts/Hashing/Hasher.php';
-        require_once __DIR__.'/../vendor/illuminate/hashing/BcryptHasher.php';
-        require_once __DIR__.'/../src/Hashing/HashBcrypt.php';
+        parent::setUp();
 
         $bcrypt = new \Illuminate\Hashing\BcryptHasher();
         $this->hasher = new \MyBB\Auth\Hashing\HashBcrypt($bcrypt);
     }
-
 
     public function testHash()
     {
