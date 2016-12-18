@@ -8,6 +8,7 @@
 	],
 	"license": "BSD-3",
 	"require": {
+		"php": ">=7.0.0",
 		"illuminate/support": "^5.3",
 		"illuminate/auth": "^5.3",
 		"illuminate/hashing": "^5.3"
